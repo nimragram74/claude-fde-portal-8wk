@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body, 'Segoe UI', system-ui, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  background:
+    radial-gradient(1100px 560px at 8% -6%, #efe6f2 0%, transparent 58%),
+    radial-gradient(1000px 560px at 104% 0%, #f6e6dd 0%, transparent 54%),
+    #f4f1ea;
+  color: #1c1a17;
+}
+
+.dark body {
+  background:
+    radial-gradient(1100px 560px at 8% -6%, #241634 0%, transparent 58%),
+    radial-gradient(1000px 560px at 104% 0%, #2a1622 0%, transparent 54%),
+    #17141c;
+  color: #ece7f2;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-thumb { background: #cbb9d6; border-radius: 8px; border: 3px solid transparent; background-clip: content-box; }
+.dark ::-webkit-scrollbar-thumb { background: #4c3a5e; border: 3px solid transparent; background-clip: content-box; }
+::-webkit-scrollbar-track { background: transparent; }
+
+@layer components {
+  .serif { font-family: 'Fraunces', Georgia, serif; }
+  .mono { font-family: 'JetBrains Mono', Consolas, monospace; }
+
+  /* Surface card that adapts to dark mode */
+  .surface {
+    @apply bg-card border border-line rounded-xl2;
+  }
+  .dark .surface {
+    background: #201a2b;
+    border-color: #362b47;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[11.5px] font-semibold uppercase tracking-[0.2em] text-coral-deep;
+  }
+  .dark .eyebrow { @apply text-coral-bright; }
+
+  .chip {
+    @apply inline-block text-[10.5px] font-semibold text-coral-deep rounded-full px-2.5 py-[3px] border;
+    background: linear-gradient(180deg, #faf1ea, #f3e2d8);
+    border-color: #ecd6c8;
+  }
+  .dark .chip {
+    background: linear-gradient(180deg, #2e2338, #2a2033);
+    color: #e5b79f;
+    border-color: #3f3050;
+  }
+
+  .prose-step code,
+  .inline-code {
+    @apply mono text-[12px] rounded px-1.5 py-[1px] text-coral-deep;
+    background: #f3e2d8;
+  }
+  .dark .prose-step code,
+  .dark .inline-code {
+    background: #33253d;
+    color: #e6a986;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition;
+  }
+  .btn-primary {
+    @apply btn text-white;
+    background: linear-gradient(135deg, #cc6a44, #b4552f);
+  }
+  .btn-primary:hover { filter: brightness(1.05); }
+  .btn-ghost {
+    @apply btn border border-line text-ink-soft bg-card;
+  }
+  .dark .btn-ghost { @apply text-plum-soft; background: #221b2d; border-color: #372b48; }
+}
+
+/* Code block */
+.codeblock {
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-size: 12.5px;
+  line-height: 1.6;
+  background: #211a2c;
+  color: #e9e2f2;
+  border-radius: 10px;
+  padding: 14px 16px;
+  overflow-x: auto;
+  border: 1px solid #372b48;
+}
+.codeblock .tok-com { color: #8b7fa5; font-style: italic; }
+.codeblock .tok-str { color: #e0a97f; }
+.codeblock .tok-key { color: #c88bd0; }
+.codeblock .tok-fn { color: #6fd0dc; }
+
+/* Focus visibility */
+:focus-visible { outline: 2px solid #cc6a44; outline-offset: 2px; border-radius: 4px; }
+
+@media print {
+  .no-print,
+  aside { display: none !important; }
+  #scroll-main { overflow: visible !important; }
+  body,
+  .dark body { background: #fff !important; }
+  /* Preserve the certificate's colours when printing */
+  .print-keep { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
